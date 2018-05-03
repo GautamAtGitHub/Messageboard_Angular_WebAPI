@@ -12,22 +12,34 @@ namespace BackendAPI.Controllers
     [Route("api/Messages")]
     public class MessagesController : Controller
     {
-        public IEnumerable<Message> Get()
+        private readonly MessageContext _context;
+        public MessagesController(MessageContext context)
         {
-            return new Message[] {
-                new Message
+            _context = context;
+
+            if(_context.MessageItems.Count() == 0)
+            {
+                _context.MessageItems.Add(new Message
                 {
+                    Id = 101,
                     Owner = "Gautam",
                     Text = "Hello"
-                },
-                new Message
-                {
-                    Owner = "Shweta",
-                    Text = "How are you?"
-                }
+                });
 
-            };
+                _context.SaveChanges();
+            }
+        }
 
+        [HttpGet]
+        public IEnumerable<Message> Get()
+        {
+            return _context.MessageItems.ToList();
+        }
+
+        [HttpPost]
+        public void Post([FromBody] Message message)
+        {
+            _context.MessageItems.Add(message);
         }
     }
 }

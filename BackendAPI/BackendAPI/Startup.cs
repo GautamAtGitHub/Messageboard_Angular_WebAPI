@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,6 +29,10 @@ namespace BackendAPI
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
+            
+            services.AddDbContext<MessageContext>(option => 
+            option.UseInMemoryDatabase("MessagesList"));
+
             services.AddMvc();
         }
 
@@ -40,6 +46,11 @@ namespace BackendAPI
 
             app.UseCors("Cors");
             app.UseMvc();
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("MVC did not find any route.");
+            });
         }
     }
 }

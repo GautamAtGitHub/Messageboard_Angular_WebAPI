@@ -13,7 +13,7 @@ export class MessageComponent implements OnInit {
     constructor(private WebService : WebService) { 
     }
   
-    async ngOnInit() {
+    async ngOnInit() { 
         var response = await this.WebService.getMEssages();
         this.messages = response.json();
     }
