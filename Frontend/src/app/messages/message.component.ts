@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { WebService } from "./../WebService";
 
 @Component({
@@ -6,16 +6,9 @@ import { WebService } from "./../WebService";
     templateUrl: './message.component.html'
 })
 
-export class MessageComponent implements OnInit {
-
-    messages = [];
+export class MessageComponent {
 
     constructor(private WebService : WebService) { 
-    }
-  
-    async ngOnInit() { 
-        var response = await this.WebService.getMEssages();
-        this.messages = response.json();
     }
   
   }

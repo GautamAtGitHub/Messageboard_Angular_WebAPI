@@ -37,9 +37,11 @@ namespace BackendAPI.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] Message message)
+        public Message Post([FromBody] Message message)
         {
             _context.MessageItems.Add(message);
+            _context.SaveChanges();
+            return message;
         }
     }
 }
