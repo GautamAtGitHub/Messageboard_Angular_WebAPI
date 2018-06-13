@@ -36,6 +36,12 @@ namespace BackendAPI.Controllers
             return _context.MessageItems.ToList();
         }
 
+        [HttpGet("{name}")]
+        public IEnumerable<Message> Get(string name)
+        {
+            return _context.MessageItems.Where(x => x.Owner.Equals(name.Trim())).ToList();
+        }
+
         [HttpPost]
         public Message Post([FromBody] Message message)
         {
