@@ -12,7 +12,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { HttpModule } from "@angular/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 //-----------------------------
 
 //-----Components-------
@@ -21,6 +21,7 @@ import { MessageComponent } from "./messages/message.component";
 import { NewMessageComponent } from "./new-message/new-message.component";
 import { NavComponent } from "./nav.component";
 import { HomeComponent } from "./home/home.component";
+import { RegisterComponent } from "./registration/register.component";
 //-----------------------------
 
 //-----Other---------
@@ -40,6 +41,10 @@ var routes = [
 {
   path:'messages/:name',
   component: MessageComponent
+},
+{
+  path:'register',
+  component: RegisterComponent
 }
 ];
 
@@ -49,7 +54,8 @@ var routes = [
     MessageComponent,
     NewMessageComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,7 @@ var routes = [
     MatSnackBarModule,
     MatToolbarModule,
     HttpModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [WebService],
