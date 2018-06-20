@@ -2,10 +2,10 @@
 import { RouterModule } from "@angular/router";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, 
-  MatCardModule, 
+  MatButtonModule,
+  MatCardModule,
   MatCheckboxModule,
   MatInputModule,
   MatSnackBarModule,
@@ -26,26 +26,27 @@ import { RegisterComponent } from "./registration/register.component";
 
 //-----Other---------
 import { WebService } from "./WebService";
+import { AuthService } from "./auth.service";
 
 //-------------------
 
 var routes = [
   {
-  path:'',
-  component: HomeComponent
-},
-{
-  path:'messages',
-  component: MessageComponent
-},
-{
-  path:'messages/:name',
-  component: MessageComponent
-},
-{
-  path:'register',
-  component: RegisterComponent
-}
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'messages',
+    component: MessageComponent
+  },
+  {
+    path: 'messages/:name',
+    component: MessageComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
 ];
 
 @NgModule({
@@ -68,7 +69,7 @@ var routes = [
     FormsModule, ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [WebService],
+  providers: [WebService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

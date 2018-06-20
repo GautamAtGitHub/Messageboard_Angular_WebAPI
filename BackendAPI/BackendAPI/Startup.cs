@@ -30,7 +30,7 @@ namespace BackendAPI
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
             
-            services.AddDbContext<MessageContext>(option => 
+            services.AddDbContext<APIContext>(option => 
             option.UseInMemoryDatabase("MessagesList"));
 
             services.AddMvc();

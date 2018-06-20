@@ -12,8 +12,8 @@ namespace BackendAPI.Controllers
     [Route("api/Messages")]
     public class MessagesController : Controller
     {
-        private readonly MessageContext _context;
-        public MessagesController(MessageContext context)
+        private readonly APIContext _context;
+        public MessagesController(APIContext context)
         {
             _context = context;
 
@@ -45,9 +45,9 @@ namespace BackendAPI.Controllers
         [HttpPost]
         public Message Post([FromBody] Message message)
         {
-            _context.MessageItems.Add(message);
+            var dbMessage = _context.MessageItems.Add(message).Entity;
             _context.SaveChanges();
-            return message;
+            return dbMessage;
         }
     }
 }

@@ -1,12 +1,13 @@
 using BackendAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-public class MessageContext : DbContext
+public class APIContext : DbContext
 {
-    public MessageContext(DbContextOptions<MessageContext> options)
+    public APIContext(DbContextOptions<APIContext> options)
         : base(options)
     {
 
     }
     public DbSet<Message> MessageItems { get; set; }
+    public DbSet<User> UserItems { get; set; }
 }
