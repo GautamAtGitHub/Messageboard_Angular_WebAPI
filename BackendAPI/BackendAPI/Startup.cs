@@ -25,13 +25,13 @@ namespace BackendAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<APIContext>(option =>
+            option.UseInMemoryDatabase("APIDB"));
+
             services.AddCors(options => options.AddPolicy("Cors", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
-            
-            services.AddDbContext<APIContext>(option => 
-            option.UseInMemoryDatabase("MessagesList"));
 
             services.AddMvc();
         }
@@ -47,10 +47,37 @@ namespace BackendAPI
             app.UseCors("Cors");
             app.UseMvc();
 
+            SeedData(app);
+
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("MVC did not find any route.");
             });
+
+        }
+
+        public void SeedData(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<APIContext>();
+                // Seed the database.
+                context.MessageItems.Add(new Models.Message
+                {
+                    Owner = "Gautam",
+                    Text = "Hello"
+                });
+
+                context.UserItems.Add(new Models.User
+                {
+                    Email = "a",
+                    FirstName = "Gautam",
+                    Password = "a"
+                });
+
+                context.SaveChanges();
+            }
         }
     }
 }

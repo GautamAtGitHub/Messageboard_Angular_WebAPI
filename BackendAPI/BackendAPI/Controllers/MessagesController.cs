@@ -17,17 +17,17 @@ namespace BackendAPI.Controllers
         {
             _context = context;
 
-            if(_context.MessageItems.Count() == 0)
-            {
-                _context.MessageItems.Add(new Message
-                {
-                    Id = 101,
-                    Owner = "Gautam",
-                    Text = "Hello"
-                });
+            //if(_context.MessageItems.Count() == 0)
+            //{
+            //    _context.MessageItems.Add(new Message
+            //    {
+            //        Id = 101,
+            //        Owner = "Gautam",
+            //        Text = "Hello"
+            //    });
 
-                _context.SaveChanges();
-            }
+            //    _context.SaveChanges();
+            //}
         }
 
         [HttpGet]

@@ -22,6 +22,7 @@ import { NewMessageComponent } from "./new-message/new-message.component";
 import { NavComponent } from "./nav.component";
 import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./registration/register.component";
+import { LoginComponent } from "./login/login.component";
 //-----------------------------
 
 //-----Other---------
@@ -46,6 +47,10 @@ var routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -56,7 +61,8 @@ var routes = [
     NewMessageComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
