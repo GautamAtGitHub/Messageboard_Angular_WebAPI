@@ -23,6 +23,7 @@ import { NavComponent } from "./nav.component";
 import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./registration/register.component";
 import { LoginComponent } from "./login/login.component";
+import { UserComponent } from "./user/user.component";
 //-----------------------------
 
 //-----Other---------
@@ -52,6 +53,11 @@ var routes = [
     path: 'login',
     component: LoginComponent
   }
+  ,
+  {
+    path: 'user',
+    component: UserComponent
+  }
 ];
 
 @NgModule({
@@ -62,7 +68,8 @@ var routes = [
     NavComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
