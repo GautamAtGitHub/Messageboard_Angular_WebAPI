@@ -15,13 +15,15 @@ export class WebService {
     messagesObservable = this.messageSubject.asObservable();
 
     constructor(private http: Http, private sb: MatSnackBar, private auth: AuthService) {
-        this.getMEssages('');
+        // if (this.auth.isAuthenticated) {
+        //     this.getMEssages('');
+        // }
     }
 
 
     getMEssages(user) {
         user = (user) ? '/' + user : '';
-        this.http.get(this.BASE_URL + '/messages' + user).subscribe(response => {
+        this.http.get(this.BASE_URL + '/messages' + user, this.auth.tokenHeader).subscribe(response => {
             this.messageStore = response.json();
             this.messageSubject.next(this.messageStore);
         }, error => {
@@ -31,7 +33,7 @@ export class WebService {
 
     async postMessage(message) {
         try {
-            var response = await this.http.post(this.BASE_URL + '/messages', message).toPromise();
+            var response = await this.http.post(this.BASE_URL + '/messages', message, this.auth.tokenHeader).toPromise();
             this.messageStore.push(response.json());
         } catch (error) {
             this.handleError("Unable to post messages");

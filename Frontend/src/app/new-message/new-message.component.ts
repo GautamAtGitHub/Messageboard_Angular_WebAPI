@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
 import { WebService } from "./../WebService";
 import { AuthService } from "./../auth.service";
+import { Router } from "@angular/router";
+
 @Component({
     selector: 'app-new-message',
     template: `
     <mat-card class="card"> 
-        
-        <mat-form-field>
+        <mat-form-field style="Width:350px;">
             <textarea [(ngModel)]="message.text" matInput placeholder="Message"></textarea>
         </mat-form-field>
         <mat-card-actions>
@@ -19,9 +20,12 @@ import { AuthService } from "./../auth.service";
 
 export class NewMessageComponent {
 
-    // @Output() onPostedEvent = new EventEmitter(); 
+    // @Output() onPostedEvent = new EventEmitter();
 
-    constructor(private WebService: WebService, private auth: AuthService) {
+    constructor(private WebService: WebService, private auth: AuthService,  private router: Router) {
+        if (!this.auth.isAuthenticated) {
+            this.router.navigate(['/login']);
+        }
     }
 
     message = {
